@@ -40,13 +40,18 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public Todo createTodo(String message) {
+        return createTodo(message, LocalDate.now());
+    }
+
+    @Override
+    public Todo createTodo(String message, LocalDate date) {
         this.start();
         var todo = Todo.builder()
                 .message(message)
                 .id(getNewTaskId())
                 .status(Status.CREATE)
-                .createOn(LocalDate.now())
-                .updateOn(LocalDate.now())
+                .createOn(date)
+                .updateOn(date)
                 .build();
         map.put(todo.getId(), todo);
         this.shutdown();

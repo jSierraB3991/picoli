@@ -29,9 +29,6 @@ public class DatabaseMigration {
 
             log.info("Show Update Tasks");
             service.findAll().forEach(System.out::println);
-        } else {
-            log.info("Show All Tasks");
-            service.findAll().forEach(System.out::println);
         }
     }
 }
