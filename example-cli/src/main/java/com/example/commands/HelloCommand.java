@@ -1,4 +1,4 @@
-package com.example;
+package com.example.commands;
 
 import picocli.CommandLine;
 
@@ -8,6 +8,8 @@ import picocli.CommandLine;
          requiredOptionMarker = '*',
          description = "This is a simple Hello Command",
          header = "Sample Command",
+         footerHeading = "%nCopyright %n",
+         footer = "\tDeveloped by Juan David Sierra",
          optionListHeading = "%nOptions are%n")
 public class HelloCommand implements Runnable {
 
