@@ -60,29 +60,23 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public Todo updateMessage(Long taskId, String message) {
-        var optionalTodo = this.finById(taskId);
-
-        if (optionalTodo.isPresent()) {
-            var task = optionalTodo.get();
-            task.setMessage(message);
-            task.setUpdateOn(LocalDate.now());
-            this.start();
-            map.put(taskId, task);
-            this.shutdown();
-            return task;
-        }
-
-        return null;
+        return update(taskId, message, null);
     }
 
     @Override
     public Todo updateStatus(Long taskId, Status status) {
+        return update(taskId, null, status);
+    }
+
+    private Todo update(Long taskId, String message, Status status) {
         var optionalTodo = this.finById(taskId);
 
         if (optionalTodo.isPresent()) {
             var task = optionalTodo.get();
-            task.setStatus(status);
+            if(Objects.nonNull(status)) { task.setStatus(status); }
+            if(Objects.nonNull(message)) { task.setMessage(message); }
             task.setUpdateOn(LocalDate.now());
+
             this.start();
             map.put(taskId, task);
             this.shutdown();
