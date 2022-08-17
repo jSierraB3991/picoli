@@ -5,7 +5,6 @@ import com.example.todo.models.Status;
 import com.example.todo.models.Todo;
 import com.example.todo.service.TodoService;
 import com.example.todo.service.impl.TodoServiceImpl;
-import org.jetbrains.annotations.NotNull;
 import picocli.CommandLine;
 
 import java.util.concurrent.Callable;
