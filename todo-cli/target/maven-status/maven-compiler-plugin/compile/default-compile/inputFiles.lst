@@ -1,9 +1,0 @@
-/home/juan-sierra/Source/java-picoli/todo-cli/src/main/java/com/mycompany/app/service/impl/TodoServiceImpl.java
-/home/juan-sierra/Source/java-picoli/todo-cli/src/main/java/com/mycompany/app/commands/TodoCommand.java
-/home/juan-sierra/Source/java-picoli/todo-cli/src/main/java/com/mycompany/app/commands/subs/ListTodoCommand.java
-/home/juan-sierra/Source/java-picoli/todo-cli/src/main/java/com/mycompany/app/models/Todo.java
-/home/juan-sierra/Source/java-picoli/todo-cli/src/main/java/com/mycompany/app/App.java
-/home/juan-sierra/Source/java-picoli/todo-cli/src/main/java/com/mycompany/app/models/Status.java
-/home/juan-sierra/Source/java-picoli/todo-cli/src/main/java/com/mycompany/app/models/ListFormat.java
-/home/juan-sierra/Source/java-picoli/todo-cli/src/main/java/com/mycompany/app/commands/subs/AddTodoCommand.java
-/home/juan-sierra/Source/java-picoli/todo-cli/src/main/java/com/mycompany/app/service/TodoService.java
