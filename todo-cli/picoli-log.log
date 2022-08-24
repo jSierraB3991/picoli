@@ -9,6 +9,7 @@
 [INFO] 
 [INFO] --- maven-dependency-plugin:2.8:copy-dependencies (default-cli) @ todo-cli ---
 [INFO] Copying junit-4.11.jar to /home/juan-sierra/Source/java-picoli/todo-cli/target/dependency/junit-4.11.jar
+[INFO] Copying lombok-1.18.24.jar to /home/juan-sierra/Source/java-picoli/todo-cli/target/dependency/lombok-1.18.24.jar
 [INFO] Copying hamcrest-core-1.3.jar to /home/juan-sierra/Source/java-picoli/todo-cli/target/dependency/hamcrest-core-1.3.jar
 [INFO] Copying picocli-4.6.3.jar to /home/juan-sierra/Source/java-picoli/todo-cli/target/dependency/picocli-4.6.3.jar
 [INFO] 
@@ -35,7 +36,7 @@
  T E S T S
 -------------------------------------------------------
 Running com.mycompany.app.AppTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.046 sec
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.044 sec
 
 Results :
 
@@ -62,6 +63,6 @@ Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.426 s
-[INFO] Finished at: 2022-08-23T19:26:47-05:00
+[INFO] Total time:  4.391 s
+[INFO] Finished at: 2022-08-23T19:32:42-05:00
 [INFO] ------------------------------------------------------------------------

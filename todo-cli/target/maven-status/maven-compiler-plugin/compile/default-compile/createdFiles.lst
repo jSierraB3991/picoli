@@ -1,5 +1,6 @@
 com/mycompany/app/models/Status.class
 com/mycompany/app/service/impl/TodoServiceImpl.class
+com/mycompany/app/models/Todo$TodoBuilder.class
 com/mycompany/app/App.class
 com/mycompany/app/commands/subs/AddTodoCommand.class
 com/mycompany/app/models/ListFormat.class
