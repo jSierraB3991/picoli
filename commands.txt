@@ -1,0 +1,6 @@
+mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=todo-cli -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+
+
+make build
+make run
+make all
