@@ -2,7 +2,6 @@ package com.mycompany.app.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -51,7 +50,7 @@ public class SqliteConnectionData {
   public List<Todo> findAllTodo() {
     var connection = SqliteConnection.connectd();
     Statement stmt = null;
-    List<Todo> list = new ArrayList();
+    List<Todo> list = new ArrayList<Todo>();
 
     try {
       stmt = connection.createStatement();

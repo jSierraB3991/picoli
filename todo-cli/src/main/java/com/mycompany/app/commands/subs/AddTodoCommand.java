@@ -6,7 +6,6 @@ import com.mycompany.app.service.impl.TodoServiceImpl;
 import picocli.CommandLine;
 
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "add",

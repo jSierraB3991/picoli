@@ -3,7 +3,6 @@ package com.mycompany.app.service;
 import com.mycompany.app.models.Status;
 import com.mycompany.app.models.Todo;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 

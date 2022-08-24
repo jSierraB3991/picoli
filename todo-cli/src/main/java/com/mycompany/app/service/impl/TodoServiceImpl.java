@@ -6,9 +6,7 @@ import com.mycompany.app.service.TodoService;
 
 import com.mycompany.app.repository.SqliteConnectionData;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class TodoServiceImpl implements TodoService {
@@ -45,9 +43,6 @@ public class TodoServiceImpl implements TodoService {
       return null;
     }
 
-    private Todo update(Long taskId, String message, Status status) {
-       return null;
-    }
 
     @Override
     public boolean markTaskCompletedById(Long taskId) {
