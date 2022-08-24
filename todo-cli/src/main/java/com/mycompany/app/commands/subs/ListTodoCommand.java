@@ -36,6 +36,7 @@ public class ListTodoCommand implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         this.service.findAll().forEach(todo -> printTodo(this.format, todo));
+            System.out.println("");
         return 0;
     }
 
@@ -49,7 +50,7 @@ public class ListTodoCommand implements Callable<Integer> {
             System.out.println("Id      = " + todo.getId());
             System.out.println("Message = " + todo.getMessage());
             System.out.println("Status  = " + todo.getStatus());
-            System.out.println("\n");
+            System.out.println("");
         }
     }
 
