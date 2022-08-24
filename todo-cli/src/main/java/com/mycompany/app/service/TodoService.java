@@ -11,8 +11,6 @@ public interface TodoService {
 
     Todo createTodo(String message);
 
-    Todo createTodo(String message, LocalDate date);
-
     Todo updateMessage(Long taskId, String message);
 
     Todo updateStatus(Long taskId, Status status);

@@ -5,7 +5,6 @@ import com.mycompany.app.service.impl.TodoServiceImpl;
 
 import picocli.CommandLine;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.Callable;
@@ -26,12 +25,6 @@ public class AddTodoCommand implements Callable<Integer> {
             required = true,
             description = "Todo note or a message")
     String[] messages;
-
-    @CommandLine.Option(names = { "--create-date", "-cd" },
-            required = false,
-            description = "Created date from the todo[s]"
-    )
-    LocalDate createDate;
 
     private TodoService service;
 

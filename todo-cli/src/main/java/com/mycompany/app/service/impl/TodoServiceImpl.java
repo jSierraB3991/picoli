@@ -4,6 +4,8 @@ import com.mycompany.app.models.Status;
 import com.mycompany.app.models.Todo;
 import com.mycompany.app.service.TodoService;
 
+import com.mycompany.app.repository.SqliteConnectionData;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -11,26 +13,35 @@ import java.util.Optional;
 
 public class TodoServiceImpl implements TodoService {
 
-    @Override
-    public Todo createTodo(String message) {
-       System.out.println(message); 
-       return null;
+    private final SqliteConnectionData sqlConnection;
+
+    public TodoServiceImpl() {
+      super();
+      this.sqlConnection = new SqliteConnectionData();
     }
 
     @Override
-    public Todo createTodo(String message, LocalDate date) {
-      System.out.println(message);
-      System.out.println(date);
-      return null;
+    public Todo createTodo(String message) {
+       this.sqlConnection.initDataBase();
+       Todo todo = Todo.builder()
+          .message(message)
+          .status(Status.CREATE)
+          .build();
+       this.sqlConnection.createTodo(todo);
+       return todo;
     }
 
     @Override
     public Todo updateMessage(Long taskId, String message) {
-      return null;
+       this.sqlConnection.initDataBase();
+       this.sqlConnection.updateMessage(taskId, message);
+       return null;
     }
 
     @Override
     public Todo updateStatus(Long taskId, Status status) {
+      this.sqlConnection.initDataBase();
+      this.sqlConnection.updateStatus(taskId, status);
       return null;
     }
 
@@ -52,7 +63,8 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public List<Todo> findAll() {
-        return null;
+       this.sqlConnection.initDataBase();
+        return this.sqlConnection.findAllTodo();
     }
 
     @Override

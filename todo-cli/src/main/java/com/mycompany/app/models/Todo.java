@@ -1,8 +1,6 @@
 package com.mycompany.app.models;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +22,4 @@ public class Todo implements Serializable {
     private Long id;
     private String message;
     private Status status;
-    private LocalDate createOn;
-    private LocalDate updateOn;
 }

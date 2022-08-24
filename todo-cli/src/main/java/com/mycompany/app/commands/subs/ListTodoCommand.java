@@ -41,16 +41,14 @@ public class ListTodoCommand implements Callable<Integer> {
 
     private void printTodo(ListFormat format, Todo todo) {
         if(format == ListFormat.SHORT){
-            System.out.printf("%4d %s %s %s%n",
+            System.out.printf("%4d %s %s%n",
                     todo.getId(),
                     getStatus(todo),
-                    todo.getCreateOn(),
                     todo.getMessage());
         } else {
             System.out.println("Id      = " + todo.getId());
             System.out.println("Message = " + todo.getMessage());
             System.out.println("Status  = " + todo.getStatus());
-            System.out.println("Created = " + todo.getCreateOn());
             System.out.println("\n");
         }
     }
