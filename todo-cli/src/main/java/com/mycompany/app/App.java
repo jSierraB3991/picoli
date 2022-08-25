@@ -7,11 +7,8 @@ import picocli.CommandLine;
  * Hello world!
  *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.exit( new CommandLine(new TodoCommand())
-                .execute(args));
-    }
+public class App {
+	public static void main(String[] args) {
+		System.exit(new CommandLine(new TodoCommand()).execute(args));
+	}
 }

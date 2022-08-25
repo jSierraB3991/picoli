@@ -20,9 +20,7 @@
 [INFO] 
 [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ todo-cli ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 11 source files to /home/juan-sierra/Source/java-picoli/todo-cli/target/classes
-[INFO] /home/juan-sierra/Source/java-picoli/todo-cli/src/main/java/com/mycompany/app/repository/SqliteConnectionData.java: /home/juan-sierra/Source/java-picoli/todo-cli/src/main/java/com/mycompany/app/repository/SqliteConnectionData.java uses unchecked or unsafe operations.
-[INFO] /home/juan-sierra/Source/java-picoli/todo-cli/src/main/java/com/mycompany/app/repository/SqliteConnectionData.java: Recompile with -Xlint:unchecked for details.
+[INFO] Compiling 12 source files to /home/juan-sierra/Source/java-picoli/todo-cli/target/classes
 [INFO] 
 [INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ todo-cli ---
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
@@ -39,7 +37,7 @@
  T E S T S
 -------------------------------------------------------
 Running com.mycompany.app.AppTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.044 sec
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.049 sec
 
 Results :
 
@@ -67,6 +65,6 @@ Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  6.003 s
-[INFO] Finished at: 2022-08-23T21:20:38-05:00
+[INFO] Total time:  6.610 s
+[INFO] Finished at: 2022-08-24T23:14:54-05:00
 [INFO] ------------------------------------------------------------------------

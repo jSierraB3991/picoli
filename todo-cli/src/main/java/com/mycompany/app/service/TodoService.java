@@ -4,25 +4,24 @@ import com.mycompany.app.models.Status;
 import com.mycompany.app.models.Todo;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface TodoService {
 
-    Todo createTodo(String message);
+	Todo createTodo(String message);
 
-    Todo updateMessage(Long taskId, String message);
+	Todo updateMessage(Integer taskId, String message) throws Exception;
 
-    Todo updateStatus(Long taskId, Status status);
+	Todo updateStatus(Integer taskId, Status status) throws Exception;
 
-    boolean markTaskCompletedById(Long taskId);
+	boolean markTaskCompletedById(Integer taskId);
 
-    boolean deleteById(Long taskId);
+	boolean deleteById(Integer taskId);
 
-    List<Todo> findAll();
+	List<Todo> findAll();
 
-    List<Todo> findAllByIds(List<Long> ids);
+	List<Todo> findAllByIds(List<Integer> ids);
 
-    List<Todo> findByStatus(Status status);
+	List<Todo> findByStatus(Status status);
 
-    Optional<Todo> finById(Long taskId);
+	Todo finById(Integer taskId) throws Exception;
 }

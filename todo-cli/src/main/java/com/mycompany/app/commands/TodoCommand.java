@@ -2,6 +2,7 @@ package com.mycompany.app.commands;
 
 import com.mycompany.app.commands.subs.AddTodoCommand;
 import com.mycompany.app.commands.subs.ListTodoCommand;
+import com.mycompany.app.commands.subs.UpdateTodoCommand;
 
 import picocli.CommandLine;
 
@@ -20,7 +21,8 @@ import java.util.concurrent.Callable;
         subcommandsRepeatable = true,
         subcommands = {
           AddTodoCommand.class,
-          ListTodoCommand.class
+          ListTodoCommand.class,
+          UpdateTodoCommand.class
         })
 public class TodoCommand implements Callable<Integer> {
 

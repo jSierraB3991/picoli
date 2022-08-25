@@ -7,73 +7,71 @@ import com.mycompany.app.service.TodoService;
 import com.mycompany.app.repository.SqliteConnectionData;
 
 import java.util.List;
-import java.util.Optional;
 
 public class TodoServiceImpl implements TodoService {
 
-    private final SqliteConnectionData sqlConnection;
+	private final SqliteConnectionData sqlConnection;
 
-    public TodoServiceImpl() {
-      super();
-      this.sqlConnection = new SqliteConnectionData();
-    }
+	public TodoServiceImpl() {
+		super();
+		this.sqlConnection = new SqliteConnectionData();
+	}
 
-    @Override
-    public Todo createTodo(String message) {
-       this.sqlConnection.initDataBase();
-       Todo todo = Todo.builder()
-          .message(message)
-          .status(Status.CREATE)
-          .build();
-       this.sqlConnection.createTodo(todo);
-       return todo;
-    }
+	@Override
+	public Todo createTodo(String message) {
+		this.sqlConnection.initDataBase();
+		Todo todo = Todo.builder().message(message).status(Status.CREATE).build();
+		return this.sqlConnection.createTodo(todo);
+	}
 
-    @Override
-    public Todo updateMessage(Long taskId, String message) {
-       this.sqlConnection.initDataBase();
-       this.sqlConnection.updateMessage(taskId, message);
-       return null;
-    }
+	@Override
+	public Todo updateMessage(Integer taskId, String message) throws Exception {
+		this.sqlConnection.initDataBase();
+		this.sqlConnection.updateMessage(taskId, message);
+		return this.finById(taskId);
+	}
 
-    @Override
-    public Todo updateStatus(Long taskId, Status status) {
-      this.sqlConnection.initDataBase();
-      this.sqlConnection.updateStatus(taskId, status);
-      return null;
-    }
+	@Override
+	public Todo updateStatus(Integer taskId, Status status) throws Exception {
+		this.sqlConnection.initDataBase();
+		this.sqlConnection.updateStatus(taskId, status);
+		return this.finById(taskId);
+	}
 
+	@Override
+	public boolean markTaskCompletedById(Integer taskId) {
+		this.sqlConnection.initDataBase();
+		this.sqlConnection.updateStatus(taskId, Status.COMPLETED);
+		return true;
+	}
 
-    @Override
-    public boolean markTaskCompletedById(Long taskId) {
-        return false; 
-    }
+	@Override
+	public boolean deleteById(Integer taskId) {
 
-    @Override
-    public boolean deleteById(Long taskId) {
+		return true;
+	}
 
+	@Override
+	public List<Todo> findAll() {
+		this.sqlConnection.initDataBase();
+		return this.sqlConnection.findAllTodoByStatus(Status.DEFAULT);
+	}
 
-        return true;
-    }
+	@Override
+	public List<Todo> findAllByIds(List<Integer> ids) {
+		this.sqlConnection.initDataBase();
+		return this.sqlConnection.findAllById(ids);
+	}
 
-    @Override
-    public List<Todo> findAll() {
-       this.sqlConnection.initDataBase();
-        return this.sqlConnection.findAllTodo();
-    }
+	@Override
+	public List<Todo> findByStatus(Status status) {
+		this.sqlConnection.initDataBase();
+		return this.sqlConnection.findAllTodoByStatus(status);
+	}
 
-    @Override
-    public List<Todo> findAllByIds(List<Long> ids) {
-       return null;
-    }
-
-    @Override
-    public List<Todo> findByStatus(Status status) {
-       return null;
-    }
-
-    @Override
-    public Optional<Todo> finById(Long taskId) {
-       return Optional.empty();
-    }
+	@Override
+	public Todo finById(Integer taskId) throws Exception {
+		this.sqlConnection.initDataBase();
+		return this.sqlConnection.findById(taskId);
+	}
 }

@@ -17,9 +17,9 @@ import lombok.ToString;
 @ToString
 public class Todo implements Serializable {
 
-    private static final long serialVersionUID = 4663044935291053899L;
+	private static final long serialVersionUID = 4663044935291053899L;
 
-    private Long id;
-    private String message;
-    private Status status;
+	private Integer id;
+	private String message;
+	private Status status;
 }
