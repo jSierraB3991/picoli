@@ -1,0 +1,1 @@
+mvn clean flyway:migrate  => update migrations for flyway
