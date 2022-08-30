@@ -7,8 +7,7 @@ import org.hibernate.cfg.Configuration;
 @Log
 public class HibernateRepository<T> {
 
-
-    public T saveModel(T model) {
+    public void saveModel(T model) {
         var factory = new Configuration()
                 .configure()
                 .addAnnotatedClass(model.getClass())
@@ -20,7 +19,6 @@ public class HibernateRepository<T> {
             session.getTransaction().commit();
             System.out.println(model.getClass().getName() + " {" + model + "} success in the database");
             session.close();
-            return model;
         } catch (Exception ex) {
             log.info("exception: " + ex.getMessage());
             throw  ex;
