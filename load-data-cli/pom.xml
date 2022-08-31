@@ -23,6 +23,8 @@
         <flyway-core.version>9.2.0</flyway-core.version>
         <lombok.version>1.18.24</lombok.version>
         <hibernate-core.version>5.6.10.Final</hibernate-core.version>
+        <progressbar.version>0.9.3</progressbar.version>
+        <commons-csv.version>1.5</commons-csv.version>
     </properties>
 
     <dependencies>
@@ -62,6 +64,21 @@
             <artifactId>flyway-core</artifactId>
             <version>${flyway-core.version}</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/me.tongfei/progressbar -->
+        <dependency>
+            <groupId>me.tongfei</groupId>
+            <artifactId>progressbar</artifactId>
+            <version>${progressbar.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>${commons-csv.version}</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
