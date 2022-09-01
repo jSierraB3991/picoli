@@ -6,8 +6,6 @@ import com.mycompany.app.utils.ConsoleColors;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import me.tongfei.progressbar.ProgressBar;
-import me.tongfei.progressbar.ProgressBarBuilder;
-import me.tongfei.progressbar.ProgressBarStyle;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import picocli.CommandLine;
@@ -51,16 +49,17 @@ public class LoadCommand implements Runnable {
         var fileName = folders[folders.length - 1];
 
         var collection = getData(stringFile);
-        var pbb = new ProgressBarBuilder()
-                .setStyle(ProgressBarStyle.UNICODE_BLOCK)
-                .setTaskName(fileName + ":")
-                .showSpeed();
-        for (var clientRequest : ProgressBar.wrap(collection, pbb)) {
-            //TODO REMOVE MESSAGE FOR HIBERNATE
-            //service.saveClient(clientRequest);
-            TimeUnit.MILLISECONDS.sleep(20);
+        try (ProgressBar pb = new ProgressBar("Reading data of " + stringFile, collection.size())) {
+            for (var clientRequest : collection) {
+                //TODO REMOVE MESSAGE FOR HIBERNATE
+                //service.saveClient(clientRequest);
+                TimeUnit.MILLISECONDS.sleep(20);
+                pb.step();
+                pb.setExtraMessage("Saving data for " + clientRequest.getName());
+            }
         }
-        var colorConsole = new ConsoleColors(ConsoleColors.TEXT_GREEN, ConsoleColors.TEXT_BG_BLACK, "Finish migrations for " + stringFile);
+        var colorConsole = new ConsoleColors(ConsoleColors.TEXT_GREEN, ConsoleColors.TEXT_BG_BLACK,
+                "Finish migrations for " + stringFile);
         System.out.println(colorConsole.getColoredString());
         System.out.println();
     }
