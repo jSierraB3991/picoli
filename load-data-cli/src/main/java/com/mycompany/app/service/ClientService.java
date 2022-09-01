@@ -6,4 +6,8 @@ import com.mycompany.app.response.ClientResponse;
 public interface ClientService {
 
     ClientResponse saveClient(ClientRequest request);
+
+    void saveFile(String fileName);
+
+    boolean isFileMigrate(String fileName);
 }

@@ -1,15 +1,20 @@
 package com.mycompany.app.repository.database.impl;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateRepositoryImpl<T> {
 
-    public void save(T model) {
-        var factory = new Configuration()
+    protected SessionFactory buildSessionFactory(Class<?> clas) {
+        return new Configuration()
                 .configure()
-                .addAnnotatedClass(model.getClass())
+                .addAnnotatedClass(clas)
                 .buildSessionFactory();
+    }
+
+    public void save(T model) {
+        var factory= buildSessionFactory(model.getClass());
         try (factory) {
             Session session = factory.openSession();
             session.beginTransaction();

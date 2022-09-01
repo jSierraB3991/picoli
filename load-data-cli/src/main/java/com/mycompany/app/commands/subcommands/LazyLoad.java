@@ -50,19 +50,30 @@ public class LazyLoad implements Callable<Integer> {
         var folders = stringFile.split("/");
         var fileName = folders[folders.length - 1];
 
+        var isMigrate = service.isFileMigrate(fileName);
+        if (isMigrate) {
+            printLogColor("This file: " + fileName + " is a save");
+            return;
+        }
         log.info("Start Reading file {}", fileName);
         var collection = fileProcessor.fileProcessOfClient(stringFile);
 
-        try (ProgressBar pb = new ProgressBar("Reading data of " + fileName, collection.size())) {
+        try (ProgressBar pb = new ProgressBar("Reading data of " + fileName, collection.size() + 1)) {
             for (var clientRequest : collection) {
-                pb.step();
-                pb.setExtraMessage("Saving data for " + clientRequest.getName());
                 service.saveClient(clientRequest);
                 TimeUnit.MILLISECONDS.sleep(10);
+                pb.step().setExtraMessage("Save data for " + clientRequest.getName());
             }
+            pb.step().setExtraMessage("Save file " + fileName);
+            service.saveFile(fileName);
         }
+
+        printLogColor("Finish migrations for " + fileName);
+    }
+
+    private void printLogColor(String message) {
         var colorConsole = new ConsoleColors(ConsoleColors.TEXT_GREEN, ConsoleColors.TEXT_BG_BLACK,
-                "Finish migrations for " + fileName);
+                message);
         System.out.println(colorConsole.getColoredString());
         System.out.println();
     }
