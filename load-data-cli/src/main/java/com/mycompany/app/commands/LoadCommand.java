@@ -49,17 +49,16 @@ public class LoadCommand implements Runnable {
         var fileName = folders[folders.length - 1];
 
         var collection = getData(stringFile);
-        try (ProgressBar pb = new ProgressBar("Reading data of " + stringFile, collection.size())) {
+        try (ProgressBar pb = new ProgressBar("Reading data of " + fileName, collection.size())) {
             for (var clientRequest : collection) {
-                //TODO REMOVE MESSAGE FOR HIBERNATE
-                //service.saveClient(clientRequest);
-                TimeUnit.MILLISECONDS.sleep(20);
                 pb.step();
                 pb.setExtraMessage("Saving data for " + clientRequest.getName());
+                service.saveClient(clientRequest);
+                TimeUnit.MILLISECONDS.sleep(10);
             }
         }
         var colorConsole = new ConsoleColors(ConsoleColors.TEXT_GREEN, ConsoleColors.TEXT_BG_BLACK,
-                "Finish migrations for " + stringFile);
+                "Finish migrations for " + fileName);
         System.out.println(colorConsole.getColoredString());
         System.out.println();
     }

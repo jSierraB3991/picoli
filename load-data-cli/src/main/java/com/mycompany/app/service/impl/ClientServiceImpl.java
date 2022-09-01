@@ -6,9 +6,7 @@ import com.mycompany.app.repository.database.ClientRepository;
 import com.mycompany.app.response.ClientRequest;
 import com.mycompany.app.response.ClientResponse;
 import com.mycompany.app.service.ClientService;
-import lombok.extern.java.Log;
 
-@Log
 public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
 
