@@ -2,19 +2,13 @@ package com.mycompany.app.commands.subcommands;
 
 import com.google.inject.Guice;
 import com.mycompany.app.config.ApplicationConfig;
-import com.mycompany.app.response.ClientRequest;
 import com.mycompany.app.service.ClientService;
 import com.mycompany.app.utils.ConsoleColors;
+import com.mycompany.app.utils.FileProcessor;
+import lombok.extern.log4j.Log4j2;
 import me.tongfei.progressbar.ProgressBar;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
 import picocli.CommandLine;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
@@ -27,12 +21,15 @@ import java.util.concurrent.TimeUnit;
         footerHeading = "%nCopyright %n",
         footer = "\tDeveloped by Juan David Sierra",
         optionListHeading = "%nOptions are%n")
+@Log4j2
 public class LazyLoad implements Callable<Integer> {
     private ClientService service;
+    private FileProcessor fileProcessor;
 
     public LazyLoad() {
         var injector = Guice.createInjector(new ApplicationConfig());
         this.service = injector.getInstance(ClientService.class);
+        this.fileProcessor = injector.getInstance(FileProcessor.class);
     }
 
     @CommandLine.Option(names = {"-f", "--file"},
@@ -53,7 +50,9 @@ public class LazyLoad implements Callable<Integer> {
         var folders = stringFile.split("/");
         var fileName = folders[folders.length - 1];
 
-        var collection = getData(stringFile);
+        log.info("Start Reading file {}", fileName);
+        var collection = fileProcessor.fileProcessOfClient(stringFile);
+
         try (ProgressBar pb = new ProgressBar("Reading data of " + fileName, collection.size())) {
             for (var clientRequest : collection) {
                 pb.step();
@@ -66,42 +65,5 @@ public class LazyLoad implements Callable<Integer> {
                 "Finish migrations for " + fileName);
         System.out.println(colorConsole.getColoredString());
         System.out.println();
-    }
-
-
-
-    private List<ClientRequest> getData(String stringFile) {
-        String[] header = {"name", "email", "address", "region", "country", "text", "numberrange"};
-        var requests = new ArrayList<ClientRequest>();
-        try (
-                var reader = Files.newBufferedReader(Paths.get(stringFile));
-                var csvParser = new CSVParser(reader, CSVFormat.DEFAULT
-                        .withHeader(header)
-                        .withFirstRecordAsHeader()
-                        .withIgnoreHeaderCase()
-                        .withTrim());
-        ) {
-            for (var csvRecord : csvParser) {
-                var name = csvRecord.get(header[0]);
-                var email = csvRecord.get(header[1]);
-                var address = csvRecord.get(header[2]);
-                var region = csvRecord.get(header[3]);
-                var country = csvRecord.get(header[4]);
-                var text = csvRecord.get(header[5]);
-                var number = csvRecord.get(header[6]);
-                requests.add(ClientRequest.builder()
-                        .name(name)
-                        .email(email)
-                        .address(address)
-                        .region(region)
-                        .country(country)
-                        .aleatoryText(text)
-                        .aleatoryNumber(Integer.parseInt(number))
-                        .build());
-            }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        return requests;
     }
 }
