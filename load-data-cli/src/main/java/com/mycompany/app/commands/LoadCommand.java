@@ -58,7 +58,7 @@ public class LoadCommand implements Runnable {
         for (var clientRequest : ProgressBar.wrap(collection, pbb)) {
             //TODO REMOVE MESSAGE FOR HIBERNATE
             //service.saveClient(clientRequest);
-            TimeUnit.MILLISECONDS.sleep(50);
+            TimeUnit.MILLISECONDS.sleep(20);
         }
         var colorConsole = new ConsoleColors(ConsoleColors.TEXT_GREEN, ConsoleColors.TEXT_BG_BLACK, "Finish migrations for " + stringFile);
         System.out.println(colorConsole.getColoredString());

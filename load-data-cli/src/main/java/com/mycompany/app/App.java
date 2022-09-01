@@ -1,7 +1,9 @@
 package com.mycompany.app;
 
+import com.google.inject.Guice;
 import com.mycompany.app.commands.LoadCommand;
 import com.mycompany.app.config.ApplicationConfig;
+import com.mycompany.app.service.ClientService;
 import picocli.CommandLine;
 
 /**
@@ -11,8 +13,10 @@ import picocli.CommandLine;
 public class App 
 {
     public static void main( String[] args ) {
+        var injector = Guice.createInjector(new ApplicationConfig());
+        var clientService = injector.getInstance(ClientService.class);
         showBanner();
-        new CommandLine(new LoadCommand(ApplicationConfig.clientService()))
+        new CommandLine(new LoadCommand(clientService))
                 .execute(args);
     }
 
