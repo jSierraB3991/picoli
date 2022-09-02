@@ -17,18 +17,22 @@ import java.util.List;
 public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
     private final LazyDataRepository lazyDataRepository;
+    private final ClientMapper clientMapper;
+    private final LazyDataMapper lazyDataMapper;
 
     @Inject
-    public ClientServiceImpl(ClientRepository clientRepository, LazyDataRepository lazyDataRepository) {
+    public ClientServiceImpl(ClientRepository clientRepository, LazyDataRepository lazyDataRepository, ClientMapper clientMapper, LazyDataMapper lazyDataMapper) {
         this.clientRepository = clientRepository;
         this.lazyDataRepository = lazyDataRepository;
+        this.clientMapper = clientMapper;
+        this.lazyDataMapper = lazyDataMapper;
     }
 
     @Override
     public ClientResponse saveClient(ClientRequest request) {
-        var client = ClientMapper.INSTANCE.toDomain(request);
+        var client = clientMapper.toDomain(request);
         clientRepository.save(client);
-        return ClientMapper.INSTANCE.toResponse(client);
+        return clientMapper.toResponse(client);
     }
 
     @Override
@@ -41,12 +45,12 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<ClientResponse> findAll(int length) {
-        return ClientMapper.INSTANCE.toResponse(this.clientRepository.findAllLength(length));
+        return clientMapper.toResponse(this.clientRepository.findAllLength(length));
     }
 
     @Override
     public List<LazyDataResponse> findAllLazyData() {
-        return LazyDataMapper.INSTANCE.toResponse(lazyDataRepository.findAll(LazyData.class));
+        return lazyDataMapper.toResponse(lazyDataRepository.findAll(LazyData.class));
     }
 
     @Override
@@ -55,7 +59,7 @@ public class ClientServiceImpl implements ClientService {
         if(oClient.isEmpty()){
             throw new RuntimeException("Unable Client");
         }
-        return ClientMapper.INSTANCE.toResponse(oClient.get());
+        return clientMapper.toResponse(oClient.get());
     }
 
     @Override
