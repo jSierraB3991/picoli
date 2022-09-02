@@ -10,7 +10,6 @@ import me.tongfei.progressbar.ProgressBar;
 import picocli.CommandLine;
 
 import java.util.concurrent.Callable;
-import java.util.concurrent.TimeUnit;
 
 @CommandLine.Command(name = "load",
         version = "1.0.0",
@@ -22,11 +21,11 @@ import java.util.concurrent.TimeUnit;
         footer = "\tDeveloped by Juan David Sierra",
         optionListHeading = "%nOptions are%n")
 @Log4j2
-public class LazyLoad implements Callable<Integer> {
+public class LoadSubCommand implements Callable<Integer> {
     private ClientService service;
     private FileProcessor fileProcessor;
 
-    public LazyLoad() {
+    public LoadSubCommand() {
         var injector = Guice.createInjector(new ApplicationConfig());
         this.service = injector.getInstance(ClientService.class);
         this.fileProcessor = injector.getInstance(FileProcessor.class);
@@ -59,13 +58,12 @@ public class LazyLoad implements Callable<Integer> {
         var collection = fileProcessor.fileProcessOfClient(stringFile);
 
         try (ProgressBar pb = new ProgressBar("Reading data of " + fileName, collection.size() + 1)) {
-            for (var clientRequest : collection) {
-                service.saveClient(clientRequest);
-                TimeUnit.MILLISECONDS.sleep(10);
-                pb.step().setExtraMessage("Save data for " + clientRequest.getName());
-            }
             pb.step().setExtraMessage("Save file " + fileName);
             service.saveFile(fileName);
+            for (var clientRequest : collection) {
+                service.saveClient(clientRequest);
+                pb.step().setExtraMessage("Save data for " + clientRequest.getName());
+            }
         }
 
         printLogColor("Finish migrations for " + fileName);
