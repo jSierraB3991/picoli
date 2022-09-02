@@ -9,7 +9,7 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 @Log4j2
-public class LazyDataRepositoryImpl extends HibernateRepositoryImpl<LazyData> implements LazyDataRepository {
+public class LazyDataRepositoryImpl extends HibernateRepositoryImpl<LazyData, Long> implements LazyDataRepository {
     @Override
     public boolean isFileMigrate(String fileName) {
         var factory = this.buildSessionFactory(LazyData.class);

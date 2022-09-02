@@ -22,8 +22,8 @@ import java.util.concurrent.Callable;
         optionListHeading = "%nOptions are%n")
 @Log4j2
 public class LoadSubCommand implements Callable<Integer> {
-    private ClientService service;
-    private FileProcessor fileProcessor;
+    private final ClientService service;
+    private final FileProcessor fileProcessor;
 
     public LoadSubCommand() {
         var injector = Guice.createInjector(new ApplicationConfig());

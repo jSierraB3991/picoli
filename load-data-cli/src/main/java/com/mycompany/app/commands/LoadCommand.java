@@ -1,5 +1,6 @@
 package com.mycompany.app.commands;
 
+import com.mycompany.app.commands.subcommands.ListSubCommand;
 import com.mycompany.app.commands.subcommands.LoadSubCommand;
 import com.mycompany.app.utils.ConsoleColors;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,8 @@ import picocli.CommandLine;
         footer = "\tDeveloped by Juan David Sierra",
         subcommandsRepeatable = true,
         subcommands = {
-            LoadSubCommand.class
+            LoadSubCommand.class,
+            ListSubCommand.class
         })
 @RequiredArgsConstructor
 public class LoadCommand implements Runnable {

@@ -1,5 +1,12 @@
 package com.mycompany.app.repository.database;
 
-public interface HibernateRepository<T> {
-    void save(T model);
+import java.util.List;
+import java.util.Optional;
+
+public interface HibernateRepository<Model, Id> {
+    void save(Model model);
+
+    List<Model> findAll(Class clas);
+
+    Optional<Model> findBy(Id idModel, Class clas);
 }

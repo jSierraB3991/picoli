@@ -27,6 +27,7 @@
         <commons-csv.version>1.5</commons-csv.version>
         <guice.version>5.1.0</guice.version>
         <log4j-core.version>2.18.0</log4j-core.version>
+        <console-table-builder.version>1.2</console-table-builder.version>
     </properties>
 
     <dependencies>
@@ -93,7 +94,11 @@
             <artifactId>log4j-core</artifactId>
             <version>${log4j-core.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>io.bretty</groupId>
+            <artifactId>console-table-builder</artifactId>
+            <version>${console-table-builder.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
