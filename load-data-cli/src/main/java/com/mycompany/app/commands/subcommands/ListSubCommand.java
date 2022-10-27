@@ -36,8 +36,8 @@ public class ListSubCommand implements Callable<Integer> {
     @CommandLine.Option(
             names = { "-t", "--type" },
             required = false,
-            description = "Show data loaded files is {LOAD_FILE}, show loaded data is {LOAD_DATA}, The value default is {LOAD_CLIENTS}",
-            defaultValue = "LOAD_FILE"
+            description = "Show data loaded files is {FILES}, show loaded data is {CLIENTS}, The value default is {CLIENTS}",
+            defaultValue = "CLIENTS"
     )
     TypeList type;
 
