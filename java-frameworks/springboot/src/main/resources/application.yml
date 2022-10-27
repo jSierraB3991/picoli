@@ -1,3 +1,6 @@
+logging:
+  level:
+    root: OFF
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/local_load_data
