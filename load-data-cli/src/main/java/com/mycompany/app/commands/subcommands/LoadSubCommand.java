@@ -60,10 +60,10 @@ public class LoadSubCommand implements Callable<Integer> {
         try (ProgressBar pb = new ProgressBar("Reading data of " + fileName, collection.size() + 1)) {
             pb.step().setExtraMessage("Save file " + fileName);
             service.saveFile(fileName);
-            for (var clientRequest : collection) {
+            collection.stream().parallel().forEach(clientRequest -> {
                 service.saveClient(clientRequest);
                 pb.step().setExtraMessage("Save data for " + clientRequest.getName());
-            }
+            });
         }
 
         printLogColor("Finish migrations for " + fileName);

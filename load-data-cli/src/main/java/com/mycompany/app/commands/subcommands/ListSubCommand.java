@@ -88,10 +88,10 @@ public class ListSubCommand implements Callable<Integer> {
         ColumnFormatter<String> emailFormatter = ColumnFormatter.text(Alignment.LEFT, 40);
 
         List<ColumnTable> columns = new ArrayList<>();
-        columns.add(new ColumnTable<>("Id", data.stream().map(ClientResponse::getId).toArray(Long[]::new), idFormatter));
-        columns.add(new ColumnTable<>("Name Of Client", data.stream().map(ClientResponse::getName).toArray(String[]::new), nameFormatter));
-        columns.add(new ColumnTable<>("Email Of Clients", data.stream().map(ClientResponse::getEmail).toArray(String[]::new), emailFormatter));
-        columns.add(new ColumnTable<>("Country Of Client", data.stream().map(ClientResponse::getCountry).toArray(String[]::new), nameFormatter));
+        columns.add(new ColumnTable<>("Id", data.stream().parallel().map(ClientResponse::getId).toArray(Long[]::new), idFormatter));
+        columns.add(new ColumnTable<>("Name Of Client", data.stream().parallel().map(ClientResponse::getName).toArray(String[]::new), nameFormatter));
+        columns.add(new ColumnTable<>("Email Of Clients", data.stream().parallel().map(ClientResponse::getEmail).toArray(String[]::new), emailFormatter));
+        columns.add(new ColumnTable<>("Country Of Client", data.stream().parallel().map(ClientResponse::getCountry).toArray(String[]::new), nameFormatter));
         return columns;
     }
 

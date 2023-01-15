@@ -4,10 +4,11 @@ import com.mycompany.app.repository.database.HibernateRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class HibernateRepositoryImpl<Model, Id> implements HibernateRepository<Model, Id> {
@@ -39,23 +40,21 @@ public class HibernateRepositoryImpl<Model, Id> implements HibernateRepository<M
         var factory = this.buildSessionFactory(clas);
         try(factory) {
             Session session = factory.openSession();
-            String hql ="FROM " + clas.getName();
-            Query<Model> query = (Query<Model>) session.createQuery(hql);
-            return query.list();
+            return session.createCriteria(clas)
+                    .list();
         }catch (Exception ex) {
             ex.printStackTrace();
             return new ArrayList<>();
         }
     }
 
-    public List<Model> findAllPageFinal(Class clas, int last) {
+    public List<Model> findAllPageFinal(Class clas, int maxResult) {
         var factory = this.buildSessionFactory(clas);
         try(factory) {
             Session session = factory.openSession();
-            String hql ="FROM " + clas.getName();
-            Query<Model> query = (Query<Model>) session.createQuery(hql);
-            query.setMaxResults(last);
-            return query.list();
+            return session.createCriteria(clas)
+                            .setMaxResults(maxResult)
+                    .list();
         }catch (Exception ex) {
             ex.printStackTrace();
             return new ArrayList<>();
@@ -67,10 +66,13 @@ public class HibernateRepositoryImpl<Model, Id> implements HibernateRepository<M
         var factory = this.buildSessionFactory(clas);
         try(factory) {
             Session session = factory.openSession();
-            String hql = "FROM " + clas.getName() + " AS model WHERE model.id = :identifier";
-            Query<Model> query = (Query<Model>) session.createQuery(hql);
-            query.setParameter("identifier",idModel);
-            return query.uniqueResultOptional();
+            var object = session.createCriteria(clas)
+                    .add(Restrictions.eq("id",idModel))
+                    .uniqueResult();
+
+            return Objects.isNull(object)
+                    ? Optional.empty()
+                    : Optional.of((Model) object);
         }catch (Exception ex) {
             ex.printStackTrace();
             return Optional.empty();

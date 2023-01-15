@@ -4,9 +4,9 @@ import com.mycompany.app.model.LazyData;
 import com.mycompany.app.repository.database.LazyDataRepository;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.Session;
-import org.hibernate.query.Query;
+import org.hibernate.criterion.Restrictions;
 
-import java.util.List;
+import java.util.Objects;
 
 @Log4j2
 public class LazyDataRepositoryImpl extends HibernateRepositoryImpl<LazyData, Long> implements LazyDataRepository {
@@ -15,11 +15,10 @@ public class LazyDataRepositoryImpl extends HibernateRepositoryImpl<LazyData, Lo
         var factory = this.buildSessionFactory(LazyData.class);
         try(factory) {
             Session session = factory.openSession();
-            String hql = "FROM LazyData AS ld WHERE ld.name = :file_name";
-            Query<LazyData> query = (Query<LazyData>) session.createQuery(hql);
-            query.setParameter("file_name",fileName);
-            List<LazyData> results = query.list();
-            return !results.isEmpty();
+            var object = session.createCriteria(LazyData.class)
+                    .add(Restrictions.eq("name",fileName))
+                    .uniqueResult();
+            return Objects.nonNull(object);
 
         }catch (Exception ex) {
             log.info("Exception: {}", ex.toString());

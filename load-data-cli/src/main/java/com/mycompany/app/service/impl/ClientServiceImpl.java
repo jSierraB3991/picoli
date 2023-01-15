@@ -3,6 +3,7 @@ package com.mycompany.app.service.impl;
 import com.google.inject.Inject;
 import com.mycompany.app.mapper.ClientMapper;
 import com.mycompany.app.mapper.LazyDataMapper;
+import com.mycompany.app.model.Client;
 import com.mycompany.app.model.LazyData;
 import com.mycompany.app.repository.database.ClientRepository;
 import com.mycompany.app.repository.database.LazyDataRepository;
@@ -21,7 +22,8 @@ public class ClientServiceImpl implements ClientService {
     private final LazyDataMapper lazyDataMapper;
 
     @Inject
-    public ClientServiceImpl(ClientRepository clientRepository, LazyDataRepository lazyDataRepository, ClientMapper clientMapper, LazyDataMapper lazyDataMapper) {
+    public ClientServiceImpl(ClientRepository clientRepository, LazyDataRepository lazyDataRepository,
+                             ClientMapper clientMapper, LazyDataMapper lazyDataMapper) {
         this.clientRepository = clientRepository;
         this.lazyDataRepository = lazyDataRepository;
         this.clientMapper = clientMapper;
@@ -55,7 +57,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientResponse findById(Long idClient) {
-        var oClient = clientRepository.findBy(idClient, ClientService.class);
+        var oClient = clientRepository.findBy(idClient, Client.class);
         if(oClient.isEmpty()){
             throw new RuntimeException("Unable Client");
         }
