@@ -15,11 +15,7 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Table(name = "lazy_data")
-@Getter
-@Setter
-@NoArgsConstructor
 @Entity
-@AllArgsConstructor
 @Builder
 public class LazyData {
 
@@ -30,4 +26,37 @@ public class LazyData {
     private String name;
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
+
+    public LazyData(Long id, String name, LocalDateTime creationDate) {
+        this.id = id;
+        this.name = name;
+        this.creationDate = creationDate;
+    }
+
+    public LazyData() {
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
 }
